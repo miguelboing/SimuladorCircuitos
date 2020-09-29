@@ -1,0 +1,45 @@
+<Gerenciador>:
+# Gerenciador responsável por administrar as telas.
+    Menu:
+        name: 'menu'
+    Interface_G:
+        name: 'interface'
+    Info:
+        name:'info'
+
+<Menu>:
+# Tela de Menu com botões para acessar as outras telas.
+    BoxLayout:
+        orientation:'vertical'
+        Label:
+            text: 'Logic Gates Simulator'
+            font_size: 50
+        Label:
+            text: 'Beta Version 0.0.01'
+        Button:
+            text: 'Start the simulator'
+            on_release: app.root.current = 'interface'
+        Button:
+            text: 'About the project'
+            on_release: app.root.current = 'info'
+
+
+<Interface_G>:
+    # Tela do simulador em questão.
+    BoxLayout:
+        Label:
+            text: 'Simulador de circuitos digitais'
+    
+        Button:
+            text: 'Back to the main screen'
+            on_release: app.root.current = 'menu'
+
+<Info>:
+    # Tela com informações sobre o projeto.
+    BoxLayout:
+        Label:
+            text: 'Projeto criado por Miguel Boing e Davi Seeman.'
+
+        Button:
+            text: 'Back to the main screen'
+            on_release: app.root.current = 'menu'
