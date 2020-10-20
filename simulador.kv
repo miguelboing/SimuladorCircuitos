@@ -15,7 +15,7 @@
             text: 'Logic Gates Simulator'
             font_size: 50
         Label:
-            text: 'Beta Version 0.0.01'
+            text: 'Beta Version 0.0.2'
         Button:
             text: 'Start the simulator'
             on_release: app.root.current = 'interface'
@@ -30,7 +30,7 @@
         orientation:'vertical'
 
         BoxLayout:#Box layout com o menu superior   
-            size_hint: 1, 0.25
+            size_hint: 1, 0.15
             GridLayout:#Botões de componentes
                 size_hint: 0.50, 1
                 rows: 2
@@ -44,21 +44,28 @@
                         size: self.size
                 Button:
                     text:'AND'
+                    on_release: root.addComponent()
                 Button:
                     text:'OR'
+                    on_release: root.addComponen()
                 Button:
                     text:'NOT'
+                    on_release: root.addComponent()
                 Button:
                     text:'NAND'
+                    on_release: root.addComponent()
                 Button:
                     text:'NOR'
+                    on_release: root.addComponent()
                 Button:
                     text:'XOR'
+                    on_release: root.addComponent()
                 Button:
                     text:'INP'
+                    on_release: root.addComponent()
                 Button:
                     text:'OUT'
-
+                    on_release: root.addComponent()
             BoxLayout:
                 canvas:
                     Color:
@@ -68,16 +75,14 @@
                         size: self.size
 
 
-        BoxLayout:#Box layout com o resto a área de trabalho
+        RelativeLayout:#Box layout com o resto a área de trabalho
+            id: workflow
             canvas:
                 Color:
                     rgba: 1,1,0,1
                 Rectangle:
                     pos: self.pos
                     size: self.size
-            
-                        
-
 
 <Info>:
     # Tela com informações sobre o projeto.
@@ -88,3 +93,24 @@
         Button:
             text: 'Back to the main screen'
             on_release: app.root.current = 'menu'
+
+
+<Comp>:    
+    # Declaração do Widget Componente
+    id: component
+    drag_rectangle: self.x, self.y, self.width, self.height
+    size_hint_x: None
+    size_hint_y: None
+    size_x: 60
+    size_y: 60
+    drag_timeout: 10000000
+    drag_distance:0
+    canvas:
+        Color:
+            rgba: 0,0,0,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    Label:
+        text: 'Logic Gate'
+        pos: component.pos
