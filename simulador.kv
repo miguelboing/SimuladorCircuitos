@@ -44,28 +44,28 @@
                         size: self.size
                 Button:
                     text:'AND'
-                    on_release: root.addComponent()
+                    on_release: root.addComponent(comp_name='AND')
                 Button:
                     text:'OR'
-                    on_release: root.addComponen()
+                    on_release: root.addComponent(comp_name='OR')
                 Button:
                     text:'NOT'
-                    on_release: root.addComponent()
+                    on_release: root.addComponent(comp_name='NOT')
                 Button:
                     text:'NAND'
-                    on_release: root.addComponent()
+                    on_release: root.addComponent(comp_name='NAND')
                 Button:
                     text:'NOR'
-                    on_release: root.addComponent()
+                    on_release: root.addComponent(comp_name='NOR')
                 Button:
                     text:'XOR'
-                    on_release: root.addComponent()
+                    on_release: root.addComponent(comp_name='XOR')
                 Button:
                     text:'INP'
-                    on_release: root.addComponent()
+                    on_release: root.addComponent(comp_name='INPUT')
                 Button:
                     text:'OUT'
-                    on_release: root.addComponent()
+                    on_release: root.addComponent(comp_name='OUTPUT')
             BoxLayout:
                 canvas:
                     Color:
@@ -105,6 +105,7 @@
     size_y: 60
     drag_timeout: 10000000
     drag_distance:0
+
     canvas:
         Color:
             rgba: 0,0,0,1
@@ -112,5 +113,15 @@
             pos: self.pos
             size: self.size
     Label:
-        text: 'Logic Gate'
+        id: comp_name_l
         pos: component.pos
+
+<Input>:
+    Button:
+        opacity: 0
+        pos: self.parent.pos
+        on_release: root.change_logical_state()
+    Label:
+        
+        id: logical_state_l
+        pos:[self.parent.pos[0], self.parent.pos[1] - 20] 
