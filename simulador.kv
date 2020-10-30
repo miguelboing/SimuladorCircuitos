@@ -1,3 +1,5 @@
+#:import C kivy.utils.get_color_from_hex
+
 <Gerenciador>:
 # Gerenciador responsável por administrar as telas.
     Menu:
@@ -9,17 +11,33 @@
 
 <Menu>:
 # Tela de Menu com botões para acessar as outras telas.
-    BoxLayout:
+    GridLayout:
         orientation:'vertical'
+        cols: 1
+        rows: 5
+        size_hint: .8, 1
+        pos_hint: {"center_x":.5}
+        spacing: 15
         Label:
             text: 'Logic Gates Simulator'
-            font_size: 50
+            font_size: 60
+            color: C("#333D51")
+            bold: True
         Label:
-            text: 'Beta Version 0.0.2'
+            text: 'Beta Version 0.0.3'
+            italic: True
+            color: C("#333D51")
         Button:
+            background_color: C("#333D51")
             text: 'Start the simulator'
+            size_hint: .7, .40
+            color: C("CBD0D8")
+            pos_hint: {"center_x":.5}
             on_release: app.root.current = 'interface'
         Button:
+            background_color: C("#333D51") 
+            color: C("CBD0D8")
+            size_hint: .7, .40
             text: 'About the project'
             on_release: app.root.current = 'info'
 
@@ -38,59 +56,79 @@
                 orientation:'vertical'
                 canvas:
                     Color:
-                        rgba: 1,1,1,1
+                        rgba:C("#D3AC2B")
                     Rectangle:
                         pos: self.pos
                         size: self.size
-                Button:
+                Button:                    
                     text:'AND'
                     on_release: root.addComponent(comp_name='AND')
-                Button:
+                Button:                    
                     text:'OR'
                     on_release: root.addComponent(comp_name='OR')
-                Button:
+                Button:                    
                     text:'NOT'
                     on_release: root.addComponent(comp_name='NOT')
-                Button:
+                Button:                    
                     text:'NAND'
                     on_release: root.addComponent(comp_name='NAND')
-                Button:
+                Button:                    
                     text:'NOR'
                     on_release: root.addComponent(comp_name='NOR')
-                Button:
+                Button:                    
                     text:'XOR'
                     on_release: root.addComponent(comp_name='XOR')
-                Button:
+                Button:                    
                     text:'INP'
                     on_release: root.addComponent(comp_name='INPUT')
-                Button:
+                Button:                    
                     text:'OUT'
                     on_release: root.addComponent(comp_name='OUTPUT')
             BoxLayout:
                 canvas:
                     Color:
-                        rgba: 1,0,1,1
+                        rgba:C("#D3AC2B")
                     Rectangle:
                         pos: self.pos
                         size: self.size
+                BoxLayout:
+                Button:
+                    size_hint: .3,.5
+                    text: "Return to menu"
+                    on_release: app.root.current = 'menu'
 
 
         RelativeLayout:#Box layout com o resto a área de trabalho
             id: workflow
             canvas:
                 Color:
-                    rgba: 1,1,0,1
+                    rgba: C("#333D51")
                 Rectangle:
                     pos: self.pos
                     size: self.size
 
 <Info>:
     # Tela com informações sobre o projeto.
-    BoxLayout:
-        Label:
-            text: 'Projeto criado por Miguel Boing e Davi Seeman.'
-
+    GridLayout:
+        orientation: "vertical"
+        spacing: 15
+        rows:3
+        cols: 1
+        size_hint: .8, 1
+        pos_hint: {"center_x":.5}
+        GridLayout:
+            rows:6
+            cols:1
+            Label:     
+                text:"Project created by Miguel Boing e Davi Seemann in 2020." 
+            
+            Label:
+                text:"For more information, go to https://github.com/miguelboing/SimuladorCircuitos"
+            Label:
+                text:"Enjoy!"   
         Button:
+            size_hint: .7, .16
+            background_color: C("#333D51")
             text: 'Back to the main screen'
             on_release: app.root.current = 'menu'
 

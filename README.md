@@ -1,7 +1,10 @@
 ![logopeteel](images/logopeteel.png)
 # Simulador de Circuitos Digitais
 
----
+[English](#peteel)   
+  
+[Portugês](#sobre-o-projeto)
+
 ## Pet**eel**
 
 [PET EEL](http://www.peteel.ufsc.br) is group of studants from tecnology courses of our university, promoted by the Federal governement, we work in the academic sector in the university labs and intern projects. Find out more at our site www.peteel.ufsc.br.

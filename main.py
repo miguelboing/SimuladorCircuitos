@@ -9,8 +9,20 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.widget import Widget
 from kivy.uix.behaviors import DragBehavior
+from kivy.utils import get_color_from_hex
+from kivy.core.window import Window
 
 kivy.require('1.11.1')
+
+#cor de fundo das janelas
+#Tema de cores - Brisk(#333D51 / #D3AC2B / #CBD0D8 / #F4F3EA) e Pebble(#433E49)
+Cinza = "#333D51"  
+Amarelo ="#D3AC2B"  
+Creme = "CBD0D8"  
+Branco = "F4F3EA"
+#Site que tem uns temas legais -> https://www.shutterstock.com/blog/10-gorgeous-color-schemes-for-websites?kw=&gclsrc=aw.ds&gclid=CjwKCAjw0On8BRAgEiwAincsHCxfN4pB0eg2Do_bYEq_E9mtM6nkPacXiLYP9_mTEOm2mlOhHli3BBoCpLkQAvD_BwE
+#se mudar a variavel muda a cor
+Window.clearcolor = get_color_from_hex(Amarelo)
 
 # Criando as classes para cada uma das telas
 class Gerenciador(ScreenManager):
