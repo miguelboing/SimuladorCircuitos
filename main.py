@@ -11,8 +11,11 @@ from kivy.uix.widget import Widget
 from kivy.uix.behaviors import DragBehavior
 from kivy.utils import get_color_from_hex
 from kivy.core.window import Window
+from kivy.uix.button import ButtonBehavior
+
 
 kivy.require('1.11.1')
+
 
 #cor de fundo das janelas
 #Tema de cores - Brisk(#333D51 / #D3AC2B / #CBD0D8 / #F4F3EA) e Pebble(#433E49)
@@ -83,7 +86,7 @@ class Xor(Comp, components.Xor):
 class Input(Comp, components.Input):
     def change_logical_state(self):
         self.logical_state = not self.logical_state
-        self.ids.logical_state_l.text = str(self.logical_state)
+        self.ids.i_logical_state_l.text = str(self.logical_state)
 
 
 class Output(Comp, components.Output):

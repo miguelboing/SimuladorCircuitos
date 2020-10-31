@@ -24,7 +24,7 @@
             color: C("#333D51")
             bold: True
         Label:
-            text: 'Beta Version 0.0.3'
+            text: 'Beta Version 0.0.4'
             italic: True
             color: C("#333D51")
         Button:
@@ -155,11 +155,17 @@
         pos: component.pos
 
 <Input>:
-    Button:
+    Button: # Esse botão pode ser substituido utilizando button behavior, porém ainda preciso implementar
         opacity: 0
         pos: self.parent.pos
         on_release: root.change_logical_state()
     Label:
-        
-        id: logical_state_l
+        id: i_logical_state_l
         pos:[self.parent.pos[0], self.parent.pos[1] - 20] 
+        text: 'False'
+
+<Output>:
+    Label:
+        id: o_logical_state_l
+        text: str(root.logical_state)
+        pos:[self.parent.pos[0], self.parent.pos[1] - 20]

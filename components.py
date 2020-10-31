@@ -1,4 +1,4 @@
-import kivy
+
 """ This module contains the input, output and all the logic gates classes used in the simulador. """
 
 
@@ -15,8 +15,7 @@ class Input(Put):
     pass
 
 class Output(Put):
-    def show_logical_state(self):
-        return self.logical_state
+    pass
 
 
 
