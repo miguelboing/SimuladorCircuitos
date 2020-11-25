@@ -1,5 +1,5 @@
 #:import C kivy.utils.get_color_from_hex
-
+#:set c 0 
 <Gerenciador>:
 # Gerenciador responsável por administrar as telas.
     Menu:
@@ -136,6 +136,7 @@
 <Comp>:    
     # Declaração do Widget Componente
     id: component
+    pos: 125, 125
     drag_rectangle: self.x, self.y, self.width, self.height
     size_hint_x: None
     size_hint_y: None
@@ -146,13 +147,49 @@
 
     canvas:
         Color:
-            rgba: 0,0,0,1
+            rgba: 0, 0, 0, 1
         Rectangle:
             pos: self.pos
             size: self.size
     Label:
         id: comp_name_l
         pos: component.pos
+
+    Button: # Saída de cada componente
+        id: wire_exit
+        pos: [component.pos[0]+ 100, component.pos[1] + 42.5]
+        size: [15, 15]
+        opacity: 1
+        on_release: 
+            app.pos1 = self.pos
+            app.c = True
+        canvas:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+    
+    Button: # Entrada de cada componente
+        id: wire_entry
+        pos: [component.pos[0], component.pos[1]]
+        size: [15, 100]
+        on_release:
+            app.pos2 = self.pos 
+            if app.c:self.parent.parent.parent.parent.addWire(app.pos1, app.pos2)
+            if app.c: app.c = False
+            
+            
+            #component.add_entry(1)
+
+            print(component.entry)
+        canvas:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
 
 <Input>:
     Button: # Esse botão pode ser substituido utilizando button behavior, porém ainda preciso implementar
@@ -165,7 +202,17 @@
         text: 'False'
 
 <Output>:
+
     Label:
         id: o_logical_state_l
-        text: str(root.logical_state)
+        text: str(root.exit)
         pos:[self.parent.pos[0], self.parent.pos[1] - 20]
+        
+
+#<Wire>:
+#    canvas.after:
+#        Color:
+#            rgba: .8,.6,.25,1
+#        Line:
+#            points: [self.pos1[0] +7, self.pos1[1]+ 7, self.pos2[0], self.pos2[1]+ 45]
+#            width: 1
