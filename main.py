@@ -1,5 +1,3 @@
-import components
-
 from kivy.app import App
 import kivy
 from kivy.lang.builder import Builder
@@ -13,10 +11,8 @@ from kivy.uix.behaviors import DragBehavior
 from kivy.utils import get_color_from_hex
 from kivy.core.window import Window
 from kivy.uix.button import ButtonBehavior
-from kivy.properties import BooleanProperty
 from kivy.properties import ListProperty
-from kivy.graphics.vertex_instructions import Line
-from kivy.graphics.context_instructions import Color
+from kivy.properties import BooleanProperty
 
 kivy.require('1.11.1')
 #cor de fundo das janelas
@@ -70,56 +66,79 @@ class Info(Screen):
 class Wire(Widget):
     def __init__(self, pos1, pos2, **kwargs):
         super().__init__(**kwargs)
-        self.pos1 = pos1
-        self.pos2 = pos2
-        with self.canvas:
-            Color(0, 1, 0, 1)
-            Line(points=[self.pos1, self.pos2], width=1)
-        
+        self.pos1 = ListProperty(pos1)
+        self.pos2 = ListProperty(pos2)
+        print(pos1, pos2)
+        print(self.pos1, self.pos2)
 
 # -------------------------------------------------------------Classes de cada porta ----------------------------------------------------------------------
 
 class Comp(DragBehavior, Widget): #Classe contendo atributos dos componentes
-    def __init__(self, comp_name='', **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, comp_name='',*entry, **kwargs):
+        super().__init__()
         self.ids.comp_name_l.text = comp_name
+        self.entry = ListProperty(*entry)
+
+        print(*entry)
+    
+    def add_entry(self, *values):
+        for value in values:
+            self.entry.append(value)
 
 
 
+class And(Comp):
+    @property
+    def exit(self):
+        return all(self.entry)
 
-class And(Comp, components.And):
-    pass
+class Or(Comp):
+    @property
+    def exit(self):
+        return any(self.entry)
 
-class Or(Comp, components.Or):
-    pass
+class Not(Comp):
+    @property
+    def exit(self):
+        return not self.entry[0]
 
-class Not(Comp, components.Not):
-    pass
+class Nand(Comp):
+    @property
+    def exit(self):
+        return not all(self.entry)
 
-class Nand(Comp, components.Nand):
-    pass
+class Nor(Comp):
+    @property
+    def exit(self):
+        return not any(self.entry)
 
-class Nor(Comp, components.Nor):
-    pass
+class Xor(Comp):
+    @property
+    def exit(self):
+        if all(self.entry) or not any(self.entry):
+            return False
+        return True
 
-class Xor(Comp, components.Xor):
-    pass
-
-class Input(Comp, components.Input):
+class Input(Comp):
+    def __init__(self):
+        super().__init__()
+        print('oi')
     def change_logical_state(self):
         self.exit = not self.exit
-        self.ids.i_logical_state_l.text = str(self.exit)
+        
 
 
-class Output(Comp, components.Output):
-    pass
+class Output(Comp):
+    @property
+    def exit(self):
+        self.ids.o_logical_state_l.text = any(self.entry)
+        print('estou funcionando')
+        return any(self.entry)
   
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Classe com o método para rodar o App
 class Simulador(App):
-    c = BooleanProperty(False)
-    pos1 = ListProperty([])
     pos2 = ListProperty([])
     def build(self):
         return Gerenciador()

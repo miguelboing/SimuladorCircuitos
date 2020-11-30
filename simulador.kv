@@ -160,9 +160,7 @@
         pos: [component.pos[0]+ 100, component.pos[1] + 42.5]
         size: [15, 15]
         opacity: 1
-        on_release: 
-            app.pos1 = self.pos
-            app.c = True
+        on_release: app.pos2 = self.pos
         canvas:
             Color:
                 rgba: 1, 1, 1, 1
@@ -174,22 +172,17 @@
         id: wire_entry
         pos: [component.pos[0], component.pos[1]]
         size: [15, 100]
-        on_release:
-            app.pos2 = self.pos 
-            if app.c:self.parent.parent.parent.parent.addWire(app.pos1, app.pos2)
-            if app.c: app.c = False
-            
-            
-            #component.add_entry(1)
-
-            print(component.entry)
         canvas:
             Color:
                 rgba: 1, 1, 1, 1
             Rectangle:
                 pos: self.pos
                 size: self.size
-
+                on_release: 
+                    self.parent.parent.parent.parent.addWire(self.pos, app.pos2)
+                    self.parent.add_entry(1)
+                    print('Ok')
+                    print(self.parent.entry)
 
 <Input>:
     Button: # Esse botão pode ser substituido utilizando button behavior, porém ainda preciso implementar
@@ -199,20 +192,20 @@
     Label:
         id: i_logical_state_l
         pos:[self.parent.pos[0], self.parent.pos[1] - 20] 
-        text: 'False'
+        text: 'False'#str(root.exit)
 
 <Output>:
 
     Label:
         id: o_logical_state_l
-        text: str(root.exit)
+        text: 'False'
         pos:[self.parent.pos[0], self.parent.pos[1] - 20]
         
 
-#<Wire>:
-#    canvas.after:
-#        Color:
-#            rgba: .8,.6,.25,1
-#        Line:
-#            points: [self.pos1[0] +7, self.pos1[1]+ 7, self.pos2[0], self.pos2[1]+ 45]
-#            width: 1
+<Wire>:
+    canvas:
+        Color:
+            rgba: .8,.6,.25, 1
+        Line:
+            points: [7,  7, 9, 45]
+            width: 1
