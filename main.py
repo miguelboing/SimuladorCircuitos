@@ -74,7 +74,7 @@ class Wire(Widget):
         self.pos2 = pos2
         with self.canvas:
             Color(0, 1, 0, 1)
-            Line(points=[self.pos1, self.pos2], width=1)
+            Line(points=[self.pos1[0] + 7,self.pos1[1]+ 7, self.pos2[0], self.pos2[1]+50], width=1)
         
 
 # -------------------------------------------------------------Classes de cada porta ----------------------------------------------------------------------
@@ -82,7 +82,8 @@ class Wire(Widget):
 class Comp(DragBehavior, Widget): #Classe contendo atributos dos componentes
     def __init__(self, comp_name='', **kwargs):
         super().__init__(**kwargs)
-        self.ids.comp_name_l.text = comp_name
+        self.comp_name = comp_name
+        self.ids.comp_name_l.text = self.comp_name
 
 
 
@@ -112,7 +113,8 @@ class Input(Comp, components.Input):
 
 
 class Output(Comp, components.Output):
-    pass
+    def update_label(self):
+        self.ids.o_logical_state_l.text = str(self.exit)
   
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -121,6 +123,7 @@ class Simulador(App):
     c = BooleanProperty(False)
     pos1 = ListProperty([])
     pos2 = ListProperty([])
+    carg = BooleanProperty(False)
     def build(self):
         return Gerenciador()
 

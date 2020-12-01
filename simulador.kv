@@ -93,6 +93,11 @@
                         size: self.size
                 BoxLayout:
                 Button:
+                    text:"Delete all"
+                    size_hint: .3,.5
+                    on_release: 
+                        print("Deleting wires and components")
+                Button:
                     size_hint: .3,.5
                     text: "Return to menu"
                     on_release: app.root.current = 'menu'
@@ -162,6 +167,7 @@
         opacity: 1
         on_release: 
             app.pos1 = self.pos
+            app.carg = component.exit
             app.c = True
         canvas:
             Color:
@@ -176,13 +182,10 @@
         size: [15, 100]
         on_release:
             app.pos2 = self.pos 
-            if app.c:self.parent.parent.parent.parent.addWire(app.pos1, app.pos2)
+            if app.c: self.parent.parent.parent.parent.addWire(app.pos1, app.pos2)
+            if app.c: component.add_entry(app.carg)
+            if app.c and component.comp_name == "OUTPUT": root.update_label()
             if app.c: app.c = False
-            
-            
-            #component.add_entry(1)
-
-            print(component.entry)
         canvas:
             Color:
                 rgba: 1, 1, 1, 1
