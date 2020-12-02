@@ -11,35 +11,44 @@
 
 <Menu>:
 # Tela de Menu com botões para acessar as outras telas.
-    GridLayout:
+    BoxLayout:
         orientation:'vertical'
-        cols: 1
-        rows: 5
-        size_hint: .8, 1
-        pos_hint: {"center_x":.5}
-        spacing: 15
-        Label:
-            text: 'Logic Gates Simulator'
-            font_size: 60
-            color: C("#333D51")
-            bold: True
-        Label:
-            text: 'Beta Version 0.0.4'
-            italic: True
-            color: C("#333D51")
-        Button:
-            background_color: C("#333D51")
-            text: 'Start the simulator'
-            size_hint: .7, .40
-            color: C("CBD0D8")
-            pos_hint: {"center_x":.5}
-            on_release: app.root.current = 'interface'
-        Button:
-            background_color: C("#333D51") 
-            color: C("CBD0D8")
-            size_hint: .7, .40
-            text: 'About the project'
-            on_release: app.root.current = 'info'
+        padding: 15
+        BoxLayout:
+            orientation:'vertical'
+            Image:
+                source:'images/logo2.png'
+                size_hint_y: None
+                height: 250
+                allow_stretch: True
+            Label:
+                text: 'Beta Version 0.0.4 - Static'
+                italic: True
+                color: C("#333D51")
+        BoxLayout:
+            orientation:'vertical'
+            spacing: 15
+            Button:
+                background_color: C("#333D51")
+                text: 'Start the simulator'
+                size_hint: .7, .2
+                color: C("CBD0D8")
+                pos_hint: {"center_x":.5}
+                on_release: app.root.current = 'interface'
+            Button:
+                background_color: C("#333D51") 
+                color: C("CBD0D8")
+                size_hint: .7, .2
+                pos_hint: {"center_x":.5}
+                text: 'About the project'
+                on_release: app.root.current = 'info'
+            Button:
+                text: "Exit"
+                background_color: C("#333D51") 
+                color: C("CBD0D8")
+                size_hint: .7, .2
+                pos_hint: {"center_x":.5}
+                on_release: app.stop()
 
 
 <Interface_G>:
@@ -145,8 +154,8 @@
     drag_rectangle: self.x, self.y, self.width, self.height
     size_hint_x: None
     size_hint_y: None
-    size_x: 60
-    size_y: 60
+    size_x: 64
+    size_y: 64
     drag_timeout: 10000000
     drag_distance:0
 
