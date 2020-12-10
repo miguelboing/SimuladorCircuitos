@@ -3,7 +3,7 @@
 
 [English](#peteel)   
   
-[Portugês](#sobre-o-projeto)
+[Português](#sobre-o-projeto)
 
 ## Pet**eel**
 
