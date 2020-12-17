@@ -53,7 +53,9 @@
 
 <Interface_G>:
     # Tela do simulador.
+    id: interface
     BoxLayout: #Layout contendo toda a tela
+        id: layout
         orientation:'vertical'
 
         BoxLayout:#Box layout com o menu superior   
@@ -102,17 +104,22 @@
                         size: self.size
                 BoxLayout:
                 Button:
+                    id: delet_b
                     text:"Delete all"
                     size_hint: .3,.5
                     on_release: 
                         print("Deleting wires and components")
+                        #self.ids.workflow.remove_widget(app.root.ids.component) 
+                        #self.remove_widget(self.parent.parent)
+                        #app.root.ids.interface.remove_widget(self.ids.layout)
+                        #app.root.get_screen(Interface_G).remove_widget(self.ids.component)
                 Button:
                     size_hint: .3,.5
                     text: "Return to menu"
                     on_release: app.root.current = 'menu'
 
 
-        RelativeLayout:#Box layout com o resto a área de trabalho
+        RelativeLayout:#Box layout com o resto da área de trabalho
             id: workflow
             canvas:
                 Color:
@@ -171,7 +178,7 @@
 
     Button: # Saída de cada componente
         id: wire_exit
-        pos: [component.pos[0]+ 100, component.pos[1] + 42.5]
+        pos: [component.pos[0] + 100, component.pos[1] + 42.5]
         size: [15, 15]
         opacity: 1
         on_release: 
@@ -194,6 +201,7 @@
             if app.c: self.parent.parent.parent.parent.addWire(app.pos1, app.pos2)
             if app.c: component.add_entry(app.carg)
             if app.c and component.comp_name == "OUTPUT": root.update_label()
+            if app.c and component.comp_name == "NOT": self.parent.remove_widget(self)
             if app.c: app.c = False
         canvas:
             Color:

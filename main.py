@@ -85,6 +85,7 @@ class Comp(DragBehavior, Widget): #Classe contendo atributos dos componentes
         self.comp_name = comp_name
         self.ids.comp_name_l.text = self.comp_name
 
+    
 
 
 
