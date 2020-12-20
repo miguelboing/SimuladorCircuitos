@@ -113,7 +113,11 @@ class Input(Comp, components.Input):
 
 class Output(Comp, components.Output):
     def update_label(self):
-        self.ids.o_logical_state_l.text = str(self.exit)
+        #self.ids.o_logical_state_l.text = str(self.exit)
+        if str(self.exit) == "True":
+            self.ids.o_logical_state_l.source = "images/gates/lamp.on.png"
+        else:
+            self.ids.o_logical_state_l.source = "images/gates/lamp.off.png"
   
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------
 

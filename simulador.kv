@@ -225,27 +225,20 @@
                 size: self.size
 
 
-<Input@ButtoBehavior+Image>:
-    Image:
-        id: i_logical_state_l
-        source: "images/gates/off.png"
+<Input>:
+    Button: # Esse botão pode ser substituido utilizando button behavior, porém ainda preciso implementar
+        opacity: 0
         pos: self.parent.pos
-        on_release:
-            root.change_logical_state()
-            self.source = "images/gates/on.png"
-    #    Button: # Esse botão pode ser substituido utilizando button behavior, porém ainda preciso implementar
-    #    opacity: 0
-    #    pos: self.parent.pos
-    #    on_release: root.change_logical_state()
-    #Label:
-    #    id: i_logical_state_l
-    #    pos:[self.parent.pos[0], self.parent.pos[1] - 20] 
-    #    text: 'False'
+        on_release: root.change_logical_state()
+    Label:
+        id: i_logical_state_l
+        pos:[self.parent.pos[0], self.parent.pos[1] - 20] 
+        text: 'False'
 
 <Output>:
     Image:
         id: o_logical_state_l
-        source:"images/gates/lamp.on.png"
+        source: "images/gates/lamp.off.png"
         pos:[self.parent.pos[0], self.parent.pos[1] - 20]
     #Label:
     #    id: o_logical_state_l
@@ -258,7 +251,7 @@
         source:"images/gates/and_gate.png"
         pos: self.parent.pos
         size: self.parent.size
-        allow_stretch: True
+        #allow_stretch: True
 
 <Or>:
 
