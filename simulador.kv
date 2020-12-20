@@ -22,7 +22,7 @@
                 height: 250
                 allow_stretch: True
             Label:
-                text: 'Beta Version 0.0.4 - Static'
+                text: 'Beta Version 0.0.8 - Static'
                 italic: True
                 color: C("#333D51")
         BoxLayout:
@@ -130,28 +130,42 @@
 
 <Info>:
     # Tela com informações sobre o projeto.
-    GridLayout:
-        orientation: "vertical"
-        spacing: 15
-        rows:3
-        cols: 1
-        size_hint: .8, 1
-        pos_hint: {"center_x":.5}
-        GridLayout:
-            rows:6
-            cols:1
-            Label:     
-                text:"Project created by Miguel Boing e Davi Seemann in 2020." 
+    ScrollView:
+        size_hint:1, .84
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: None
+            height:self.minimum_height
+            Title:
+                text: "About the project"
             
+            Heading:
+                text: "Project Purpose"
+            Body_Text:
+                text: app.text_1
+            
+            Heading:
+                text: "Static Version"
+            Body_Text:
+                text: app.text_2
+
+            Heading:
+                text:"How to simulate a circuit?"
+            Body_Text:
+                text:app.text_3
+
             Label:
-                text:"For more information, go to https://github.com/miguelboing/SimuladorCircuitos"
-            Label:
-                text:"Enjoy!"   
-        Button:
-            size_hint: .7, .16
-            background_color: C("#333D51")
-            text: 'Back to the main screen'
-            on_release: app.root.current = 'menu'
+                size_hint:1, None
+                size_y:300
+            
+
+                
+
+    Button:
+        size_hint: 1, .16
+        background_color: C("#333D51")
+        text: 'Back to the main screen'
+        on_release: app.root.current = 'menu'
 
 
 <Comp>:    
@@ -287,10 +301,26 @@
         #allow_stretch: True
         
 
-#<Wire>:
-#    canvas.after:
-#        Color:
-#            rgba: .8,.6,.25,1
-#        Line:
-#            points: [self.pos1[0] +7, self.pos1[1]+ 7, self.pos2[0], self.pos2[1]+ 45]
-#            width: 1
+
+#Classes dinâmicas para tela de Info
+<Title@Label>:
+    size_hint: 1, None
+    size_y: 38
+    bold: True
+    underline: True
+    font_size: 32
+    color: 0,0,0,1
+
+<Heading@Label>:
+    size_hint:1, None
+    size_y: 24
+    bold: True
+    font_size: 24
+    color: 0,0,0,1
+
+<Body_Text@Label>:
+    size_hint:1, None
+    size: self.texture_size
+    font_size: 18
+    valign: 'middle'
+    color: 0,0,0,1

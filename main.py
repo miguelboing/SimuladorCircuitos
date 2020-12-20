@@ -4,6 +4,7 @@ from kivy.app import App
 import kivy
 from kivy.lang.builder import Builder
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.scrollview import ScrollView
 from kivy.uix.label import Label
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.gridlayout import GridLayout 
@@ -86,10 +87,6 @@ class Comp(DragBehavior, Widget): #Classe contendo atributos dos componentes
         self.comp_name = comp_name
         self.ids.comp_name_l.text = self.comp_name
 
-    
-
-
-
 class And(Comp, components.And):
     pass
 
@@ -126,10 +123,38 @@ class Simulador(App):
     pos1 = ListProperty([])
     pos2 = ListProperty([])
     carg = BooleanProperty(False)
+    text_1 = """    The main purpose of this project is to help beginners in the study of digital\n
+    electronics, simulating combinatory circuits bringing theory to practice in a\n
+    simple way.\n\n
+
+    The software is designed specifically to help testing combinatorial circuits,\n
+    and for now we don't have plans of adding sequencial circuits in future ver-\n
+    sions.\n\n
+
+    This project is still under development therefore there’s a lot to be implemen-\n
+    ted, and bugs can eventually appear."""
+
+    text_2 = """    This specific version is static, that means that the circuit cannot receive or up-\n
+    date a component entry after the wire connections are created. This version\n
+    is just a start and eventually will be obsolete with the launch of a dinamic ver-\n
+    sion."""
+
+    text_3 = """    That is very simple here’s the steps on how to create a circuit:\n\n
+
+        1. Add all the inputs and set their values.\n\n
+
+        2. Add the logic ports doing the wire connections left to right.\n\n
+
+        3. Add the output ports, connect then to the ends of the circuit.\n\n
+
+        Done, now you can check the outputs of the circuit!\n\n
+
+    For more information go to: https://github.com/miguelboing/SimuladorCircuitos\n
+    """
+
     def build(self):
         return Gerenciador()
 
 # Rodando o programa
 if __name__ == '__main__':
     Simulador().run()
-
