@@ -108,7 +108,11 @@ class Xor(Comp, components.Xor):
 class Input(Comp, components.Input):
     def change_logical_state(self):
         self.exit = not self.exit
-        self.ids.i_logical_state_l.text = str(self.exit)
+        #self.ids.i_logical_state_l.text = str(self.exit)
+        if str(self.exit) == "True":
+            self.ids.i_logical_state_l.source = "images/gates/on.png"
+        else:
+            self.ids.i_logical_state_l.source = "images/gates/off.png"
 
 
 class Output(Comp, components.Output):
