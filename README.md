@@ -7,12 +7,12 @@
 
 ## Pet**eel**
 
-[PET EEL](http://www.peteel.ufsc.br) is group of studants from tecnology courses of our university, promoted by the Federal governement, we work in the academic sector in the university labs and intern projects. Find out more at our site www.peteel.ufsc.br.
+[PET EEL](http://www.peteel.ufsc.br) is group of studants in tecnology courses of our university, promoted by the Federal governement, we work in the academic sector in the university labs and intern projects. Find out more at our site www.peteel.ufsc.br.
 
 ## About the Project
 #### Authors:
 
-This project has been developed by the studants Davi Grumiche Seemann, Eletrical Engeneering undergrad studant, [github](https://github.com/daviseemann) / [Linkedin](https://www.linkedin.com/in/daviseemann), and Miguel Boing, Eletronic Engeneerig undergrad studant, [github](https://github.com/miguelboing) / [Linkedin](https://www.linkedin.com/in/miguel-b%C3%B6ing-6aaba11b5/), both at [Universidade Federal de Santa Catarina](https://www.ufsc.br)
+This project has been developed by the studants Davi Grumiche Seemann, Electrical Engeneering undergrad studant, [github](https://github.com/daviseemann) / [Linkedin](https://www.linkedin.com/in/daviseemann), and Miguel Boing, Electronic Engeneerig undergrad studant, [github](https://github.com/miguelboing) / [Linkedin](https://www.linkedin.com/in/miguel-b%C3%B6ing-6aaba11b5/), both at [Universidade Federal de Santa Catarina](https://www.ufsc.br)
 #### Motivation
 As PET EEL freshmans we want to impact our academic community in a positive way.
 
@@ -56,7 +56,7 @@ Esse projeto foi desenvolvido pelos estudantes Davi Grumcihe Seemann, graduando 
 #### Motivação
 Como calouros do PET EEL queremos impactar nosso meio academico de maneira positiva.
 #### Propósito
-O propósito do projeto é ajudar estudantes do curso Circuitos, a fim de possibilitar uma simulação do funcionamento de portas lógicas. Trazendo a teoria para prática de maneira simples.
+O propósito do projeto é ajudar estudantes das diciplinas de circuitos e técnicas digitais, a fim de possibilitar uma simulação do funcionamento de portas lógicas. Trazendo a teoria para prática de maneira simples.
 
 ## Pré-requisitos
 

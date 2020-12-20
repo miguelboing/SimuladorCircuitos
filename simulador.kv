@@ -168,7 +168,7 @@
 
     canvas:
         Color:
-            rgba: 0, 0, 0, 1
+            rgba: C("#333D51")
         Rectangle:
             pos: self.pos
             size: self.size
@@ -194,8 +194,8 @@
     
     Button: # Entrada de cada componente
         id: wire_entry
-        pos: [component.pos[0], component.pos[1]]
-        size: [15, 100]
+        pos: [component.pos[0], component.pos[1] + 15]
+        size: [15, 70]
         on_release:
             app.pos2 = self.pos 
             if app.c: self.parent.parent.parent.parent.addWire(app.pos1, app.pos2)
@@ -205,28 +205,86 @@
             if app.c: app.c = False
         canvas:
             Color:
-                rgba: 1, 1, 1, 1
+                rgba: C("#333D51")
             Rectangle:
                 pos: self.pos
                 size: self.size
 
 
-<Input>:
-    Button: # Esse botão pode ser substituido utilizando button behavior, porém ainda preciso implementar
-        opacity: 0
-        pos: self.parent.pos
-        on_release: root.change_logical_state()
-    Label:
+<Input@ButtoBehavior+Image>:
+    Image:
         id: i_logical_state_l
-        pos:[self.parent.pos[0], self.parent.pos[1] - 20] 
-        text: 'False'
+        source: "images/gates/off.png"
+        pos: self.parent.pos
+        on_release:
+            root.change_logical_state()
+            self.source = "images/gates/on.png"
+    #    Button: # Esse botão pode ser substituido utilizando button behavior, porém ainda preciso implementar
+    #    opacity: 0
+    #    pos: self.parent.pos
+    #    on_release: root.change_logical_state()
+    #Label:
+    #    id: i_logical_state_l
+    #    pos:[self.parent.pos[0], self.parent.pos[1] - 20] 
+    #    text: 'False'
 
 <Output>:
-
-    Label:
+    Image:
         id: o_logical_state_l
-        text: str(root.exit)
+        source:"images/gates/lamp.on.png"
         pos:[self.parent.pos[0], self.parent.pos[1] - 20]
+    #Label:
+    #    id: o_logical_state_l
+    #    text: str(root.exit)
+    #    pos:[self.parent.pos[0], self.parent.pos[1] - 20]
+
+<And>:
+
+    Image:
+        source:"images/gates/and_gate.png"
+        pos: self.parent.pos
+        size: self.parent.size
+        allow_stretch: True
+
+<Or>:
+
+    Image:
+        source:"images/gates/or_gate.png"
+        pos: self.parent.pos
+        size: self.parent.size
+        #allow_stretch: True
+
+<Nand>:
+
+    Image:
+        source:"images/gates/nand_gate.png"
+        pos: self.parent.pos
+        size: self.parent.size
+        #allow_stretch: True
+
+<Nor>:
+
+    Image:
+        source:"images/gates/nor_gate.png"
+        pos: self.parent.pos
+        size: self.parent.size
+        #allow_stretch: True
+
+<Xor>:
+
+    Image:
+        source:"images/gates/xor_gate.png"
+        pos: self.parent.pos
+        size: self.parent.size
+        #allow_stretch: True
+
+<Not>:
+
+    Image:
+        source:"images/gates/not_gate.png"
+        pos: self.parent.pos
+        size: self.parent.size
+        #allow_stretch: True
         
 
 #<Wire>:

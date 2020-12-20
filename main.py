@@ -17,6 +17,7 @@ from kivy.properties import BooleanProperty
 from kivy.properties import ListProperty
 from kivy.graphics.vertex_instructions import Line
 from kivy.graphics.context_instructions import Color
+from kivy.uix.image import Image
 
 kivy.require('1.11.1')
 #cor de fundo das janelas
