@@ -13,6 +13,11 @@ class Component:
             self.entry.append(value)
         
 class Or(Component):
+    #def __init__(self,**kwargs):
+        #super().__init__(**kwargs)
+        #self.logic_value = exit()
+        #print('OPA')
+
     @property
     def exit(self):
         return any(self.entry)
@@ -25,7 +30,7 @@ class And(Component):
 class Not(Component):
     @property
     def exit(self):
-        return not(self.entry[0])
+        return not self.entry[0]
 
 class Nand(Component):
     @property
@@ -60,3 +65,15 @@ class Output(Component):
         if any(self.entry):
             return True
         return False
+    
+
+
+
+# Bateria de testes
+#porta = Nor(1,0,1)
+#print(porta.exit)
+#print(porta.entry)
+#porta.add_entry(1,1,1,1)
+#print(porta.exit)
+#print(porta.entry)
+

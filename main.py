@@ -31,9 +31,6 @@ Branco = "F4F3EA"
 #se mudar a variavel muda a cor
 Window.clearcolor = get_color_from_hex(Amarelo)
 
-
-
-
 # Criando as classes para cada uma das telas
 class Gerenciador(ScreenManager):
     pass
@@ -161,6 +158,8 @@ class Simulador(App):
     """
 
     def build(self):
+        self.icon = 'images/logo2.png'
+        self.title = 'simuGATE'
         return Gerenciador()
 
 # Rodando o programa
