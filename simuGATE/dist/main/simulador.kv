@@ -1,0 +1,313 @@
+#:import C kivy.utils.get_color_from_hex
+#:set c 0 
+<Gerenciador>:
+# Gerenciador responsável por administrar as telas.
+    Menu:
+        name: 'menu'
+    Interface_G:
+        name: 'interface'
+    Info:
+        name:'info'
+
+<Menu>:
+# Tela de Menu com botões para acessar as outras telas.
+    BoxLayout:
+        orientation:'vertical'
+        padding: 15
+        BoxLayout:
+            orientation:'vertical'
+            Image:
+                source:'images/logo2.png'
+                size_hint_y: None
+                height: 250
+                allow_stretch: True
+            Label:
+                text: 'Beta Version 0.0.9 - Static'
+                italic: True
+                color: C("#333D51")
+        BoxLayout:
+            orientation:'vertical'
+            spacing: 15
+            Button:
+                background_color: C("#333D51")
+                text: 'Start the simulator'
+                size_hint: .7, .2
+                color: C("CBD0D8")
+                pos_hint: {"center_x":.5}
+                on_release: app.root.current = 'interface'
+            Button:
+                background_color: C("#333D51") 
+                color: C("CBD0D8")
+                size_hint: .7, .2
+                pos_hint: {"center_x":.5}
+                text: 'About the project'
+                on_release: app.root.current = 'info'
+            Button:
+                text: "Exit"
+                background_color: C("#333D51") 
+                color: C("CBD0D8")
+                size_hint: .7, .2
+                pos_hint: {"center_x":.5}
+                on_release: app.stop()
+
+
+<Interface_G>:
+    # Tela do simulador.
+    name: 'simu'
+    id: interface
+    BoxLayout: #Layout contendo toda a tela
+        id: layout
+        orientation:'vertical'
+
+        BoxLayout:#Box layout com o menu superior   
+            size_hint: 1, 0.15
+            GridLayout:#Botões de componentes
+                size_hint: 0.50, 1
+                rows: 2
+                cols: 4
+                orientation:'vertical'
+                canvas:
+                    Color:
+                        rgba:C("#D3AC2B")
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                Button:                    
+                    text:'AND'
+                    on_release: root.addComponent(comp_name='AND')
+                Button:                    
+                    text:'OR'
+                    on_release: root.addComponent(comp_name='OR')
+                Button:                    
+                    text:'NOT'
+                    on_release: root.addComponent(comp_name='NOT')
+                Button:                    
+                    text:'NAND'
+                    on_release: root.addComponent(comp_name='NAND')
+                Button:                    
+                    text:'NOR'
+                    on_release: root.addComponent(comp_name='NOR')
+                Button:                    
+                    text:'XOR'
+                    on_release: root.addComponent(comp_name='XOR')
+                Button:                    
+                    text:'INP'
+                    on_release: root.addComponent(comp_name='INPUT')
+                Button:                    
+                    text:'OUT'
+                    on_release: root.addComponent(comp_name='OUTPUT')
+            BoxLayout:
+            BoxLayout:
+                canvas:
+                    Color:
+                        rgba:C("#D3AC2B")
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                
+                Button:
+                    id: delet_b
+                    text:"Delete all"
+                    size_hint: .3,.5
+                    on_release: 
+                        print("Deleting wires and components")
+                        #app.root.get_screen('simu').ids.component.remove_widget(self)
+                        root.deletComponent()
+                Button:
+                    size_hint: .3,.5
+                    text: "Return to menu"
+                    on_release: app.root.current = 'menu'
+
+
+        RelativeLayout:#Box layout com o resto da área de trabalho
+            id: workflow
+            canvas:
+                Color:
+                    rgba: C("#333D51")
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+<Info>:
+    # Tela com informações sobre o projeto.
+    ScrollView:
+        size_hint:1, .84
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: None
+            height:self.minimum_height
+            Title:
+                text: "About the project"
+            
+            Heading:
+                text: "Project Purpose"
+            Body_Text:
+                text: app.text_1
+            
+            Heading:
+                text: "Static Version"
+            Body_Text:
+                text: app.text_2
+
+            Heading:
+                text:"How to simulate a circuit?"
+            Body_Text:
+                text:app.text_3
+
+            Label:
+                size_hint:1, None
+                size_y:300             
+
+    Button:
+        size_hint: 1, .16
+        background_color: C("#333D51")
+        text: 'Back to the main screen'
+        on_release: app.root.current = 'menu'
+
+
+<Comp>:    
+    # Declaração do Widget Componente
+    id: component
+    pos: 125, 125
+    drag_rectangle: self.x, self.y, self.width, self.height
+    size_hint_x: None
+    size_hint_y: None
+    size_x: 64
+    size_y: 64
+    drag_timeout: 10000000
+    drag_distance:0
+
+    canvas:
+        Color:
+            rgba: C("#333D51")
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    Label:
+        id: comp_name_l
+        pos: component.pos
+
+    Button: # Saída de cada componente
+        id: wire_exit
+        pos: [component.pos[0] + 100, component.pos[1] + 42.5]
+        size: [15, 15]
+        opacity: 1
+        on_release: 
+            app.pos1 = self.pos
+            app.carg = component.exit
+            app.c = True
+        canvas:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+    
+    Button: # Entrada de cada componente
+        id: wire_entry
+        pos: [component.pos[0], component.pos[1] + 15]
+        size: [15, 70]
+        opacity: 0
+        on_release:
+            app.pos2 = self.pos 
+            if app.c: self.parent.parent.parent.parent.addWire(app.pos1, app.pos2)
+            if app.c: component.add_entry(app.carg)
+            if app.c and component.comp_name == "OUTPUT": root.update_label()
+            if app.c and (component.comp_name == "NOT" or component.comp_name == "OUTPUT"): self.parent.remove_widget(self)
+            if app.c: app.c = False
+        canvas:
+            Color:
+                rgba: C("#333D51")
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+<Input>:
+    Button: # Esse botão pode ser substituido utilizando button behavior, porém ainda preciso implementar
+        opacity: 0
+        pos: self.parent.pos
+        on_release: root.change_logical_state()
+    Image:
+        id: i_logical_state_l
+        pos:[self.parent.pos[0], self.parent.pos[1] - 20] 
+        source: "images/gates/off.png"
+
+<Output>:
+    Image:
+        id: o_logical_state_l
+        source: "images/gates/lamp.off.png"
+        pos:[self.parent.pos[0], self.parent.pos[1] - 20]
+    #Label:
+    #    id: o_logical_state_l
+    #    text: str(root.exit)
+    #    pos:[self.parent.pos[0], self.parent.pos[1] - 20]
+
+<And>:
+
+    Image:
+        source:"images/gates/and_gate.png"
+        pos: self.parent.pos
+        size: self.parent.size
+        #allow_stretch: True
+
+<Or>:
+
+    Image:
+        source:"images/gates/or_gate.png"
+        pos: self.parent.pos
+        size: self.parent.size
+        #allow_stretch: True
+
+<Nand>:
+
+    Image:
+        source:"images/gates/nand_gate.png"
+        pos: self.parent.pos
+        size: self.parent.size
+        #allow_stretch: True
+
+<Nor>:
+
+    Image:
+        source:"images/gates/nor_gate.png"
+        pos: self.parent.pos
+        size: self.parent.size
+        #allow_stretch: True
+
+<Xor>:
+
+    Image:
+        source:"images/gates/xor_gate.png"
+        pos: self.parent.pos
+        size: self.parent.size
+        #allow_stretch: True
+
+<Not>:
+    Image:
+        source:"images/gates/not_gate.png"
+        pos: self.parent.pos
+        size: self.parent.size
+        #allow_stretch: True
+
+#Classes dinâmicas para tela de Info
+<Title@Label>:
+    size_hint: 1, None
+    size_y: 38
+    bold: True
+    underline: True
+    font_size: 32
+    color: 0,0,0,1
+
+<Heading@Label>:
+    size_hint:1, None
+    size_y: 24
+    bold: True
+    font_size: 24
+    color: 0,0,0,1
+
+<Body_Text@Label>:
+    size_hint:1, None
+    size: self.texture_size
+    font_size: 18
+    valign: 'middle'
+    color: 0,0,0,1
