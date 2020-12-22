@@ -61,6 +61,8 @@ class Interface_G(Screen):
     def addWire(self, pos1, pos2): # Método para criar fios
         self.ids.workflow.add_widget(Wire(pos1, pos2))    
 
+    def deletComponent(self):
+        self.ids.workflow.clear_widgets()
 class Info(Screen):
     pass 
 

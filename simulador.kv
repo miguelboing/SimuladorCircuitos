@@ -22,7 +22,7 @@
                 height: 250
                 allow_stretch: True
             Label:
-                text: 'Beta Version 0.0.8 - Static'
+                text: 'Beta Version 0.0.9 - Static'
                 italic: True
                 color: C("#333D51")
         BoxLayout:
@@ -53,6 +53,7 @@
 
 <Interface_G>:
     # Tela do simulador.
+    name: 'simu'
     id: interface
     BoxLayout: #Layout contendo toda a tela
         id: layout
@@ -96,23 +97,22 @@
                     text:'OUT'
                     on_release: root.addComponent(comp_name='OUTPUT')
             BoxLayout:
+            BoxLayout:
                 canvas:
                     Color:
                         rgba:C("#D3AC2B")
                     Rectangle:
                         pos: self.pos
                         size: self.size
-                BoxLayout:
+                
                 Button:
                     id: delet_b
                     text:"Delete all"
                     size_hint: .3,.5
                     on_release: 
                         print("Deleting wires and components")
-                        #self.ids.workflow.remove_widget(app.root.ids.component) 
-                        #self.remove_widget(self.parent.parent)
-                        #app.root.ids.interface.remove_widget(self.ids.layout)
-                        #app.root.get_screen(Interface_G).remove_widget(self.ids.component)
+                        #app.root.get_screen('simu').ids.component.remove_widget(self)
+                        root.deletComponent()
                 Button:
                     size_hint: .3,.5
                     text: "Return to menu"
@@ -156,10 +156,7 @@
 
             Label:
                 size_hint:1, None
-                size_y:300
-            
-
-                
+                size_y:300             
 
     Button:
         size_hint: 1, .16
@@ -215,7 +212,7 @@
             if app.c: self.parent.parent.parent.parent.addWire(app.pos1, app.pos2)
             if app.c: component.add_entry(app.carg)
             if app.c and component.comp_name == "OUTPUT": root.update_label()
-            if app.c and component.comp_name == "NOT": self.parent.remove_widget(self)
+            if app.c and (component.comp_name == "NOT" or component.comp_name == "OUTPUT"): self.parent.remove_widget(self)
             if app.c: app.c = False
         canvas:
             Color:
@@ -223,7 +220,6 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-
 
 <Input>:
     Button: # Esse botão pode ser substituido utilizando button behavior, porém ainda preciso implementar
@@ -286,14 +282,11 @@
         #allow_stretch: True
 
 <Not>:
-
     Image:
         source:"images/gates/not_gate.png"
         pos: self.parent.pos
         size: self.parent.size
         #allow_stretch: True
-        
-
 
 #Classes dinâmicas para tela de Info
 <Title@Label>:
